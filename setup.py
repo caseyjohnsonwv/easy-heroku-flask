@@ -16,6 +16,10 @@ setuptools.setup(
   include_package_data = True,
   scripts = ["bin/mkproj.sh"],
   install_requires = [],
+  entry_points="""
+  [console_scripts]
+  easy-heroku-flask=mkproj.sh
+  """,
   classifiers = [
     "Programming Language :: Python :: 3.7.6",
     "License :: MIT LICENSE",
