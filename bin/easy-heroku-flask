@@ -30,6 +30,6 @@ echo "gunicorn: web app:app" > Procfile
 
 touch env.py app.py
 touch .env .gitignore
-echo ".env\nenv.py" > .gitignore
+echo ".env\nenv.py\nenv.pyc\n__pycache__" > .gitignore
 
 printf "Flask project '$PROJNAME' created.\n"
