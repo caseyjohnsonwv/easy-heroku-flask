@@ -14,12 +14,8 @@ setuptools.setup(
   url = "https://github.com/caseyjohnsonwv/easy-heroku-flask",
   packages = setuptools.find_packages(),
   include_package_data = True,
-  scripts = ["bin/mkproj.sh"],
+  scripts = ["bin/mkproj"],
   install_requires = [],
-  entry_points="""
-  [console_scripts]
-  easy-heroku-flask=mkproj.sh
-  """,
   classifiers = [
     "Programming Language :: Python :: 3.7.6",
     "License :: MIT LICENSE",
