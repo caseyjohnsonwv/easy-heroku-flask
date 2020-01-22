@@ -32,4 +32,10 @@ touch env.py app.py
 touch .env .gitignore
 echo ".env\nenv.py\nenv.pyc\n__pycache__" > .gitignore
 
+mkdir "templates"
+touch "templates/index.html"
+
+mkdir "static"
+touch "static/index.css" "static/index.js"
+
 printf "Flask project '$PROJNAME' created.\n"
