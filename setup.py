@@ -16,9 +16,4 @@ setuptools.setup(
   include_package_data = True,
   scripts = ["bin/easy-heroku-flask"],
   install_requires = [],
-  classifiers = [
-    "Programming Language :: Python :: 3.7.6",
-    "License :: MIT LICENSE",
-    "Operating System :: OS Independent",
-  ],
 )
