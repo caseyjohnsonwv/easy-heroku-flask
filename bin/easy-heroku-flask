@@ -26,7 +26,7 @@ touch requirements.txt
 echo "Flask\nflask-sqlalchemy\npsycopg2\ngunicorn" > requirements.txt
 
 touch Procfile
-echo "gunicorn: web app:app" > Procfile
+echo "web: gunicorn app:app" > Procfile
 
 touch env.py app.py
 touch .env .gitignore
