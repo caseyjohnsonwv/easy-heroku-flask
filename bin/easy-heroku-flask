@@ -1,18 +1,17 @@
 #!/bin/sh
 
 if [ $# -lt 1 ]; then
-    printf "Usage: 'easy-heroku-flask [PROJECT NAME]'\n"
+    printf "Usage: 'easy-heroku-flask <project name>'\n"
     exit
 fi
 
 PROJNAME=$1
-
-if [ -d "$PROJNAME" ]; then
-    printf "Directory '$PROJNAME' already exists!\n"
+mkdir "$PROJNAME" 2>/dev/null
+if [ "$?" -ne "0" ]; then
+    printf "Unable to create directory '$PROJNAME'- is this valid?\n"
     exit
 fi
 
-mkdir "$PROJNAME"
 cd "$PROJNAME"
 git init -q
 
