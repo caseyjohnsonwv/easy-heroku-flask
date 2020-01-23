@@ -5,19 +5,39 @@ if [ $# -lt 1 ]; then
     exit
 fi
 
+sudo echo ""
+
 PROJNAME=$1
+REPOURL="https://github.com/caseyjohnsonwv/$PROJNAME"
+
 mkdir "$PROJNAME" 2>/dev/null
 if [ "$?" -ne "0" ]; then
     printf "Unable to create directory '$PROJNAME'- is this valid?\n"
     exit
 fi
+
 cd "$PROJNAME"
 
+printf "Cloning app template from https://github.com/caseyjohnsonwv/easy-heroku-flask.\n"
 git clone https://github.com/caseyjohnsonwv/easy-heroku-flask .ehfqs -q
 mv .ehfqs/quickstart/* .
 rm -rf .ehfqs
-
-git init -q
 echo ".env\nenv.py\nenv.pyc\n__pycache__" > .gitignore
 
-printf "Flask project '$PROJNAME' created.\n"
+printf "Installing Heroku/Flask requirements.\n"
+python3 -m pip install -r requirements.txt --no-cache-dir --force-reinstall --upgrade -q
+
+printf "Installing Heroku command line interface.\n"
+sudo snap install --classic heroku -q
+
+printf "Syncing new project to remote repository.\n"
+git init -q
+git add .
+git commit -m "initial commit" -q
+git remote add origin "$REPOURL" -q
+git push origin master -q
+if [ "$?" -ne "0" ]; then
+  printf "Failed to push to '$REPOURL'- is this valid?\n"
+fi
+
+printf "Heroku/Flask project '$PROJNAME' created.\n"
