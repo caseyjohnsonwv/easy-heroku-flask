@@ -8,7 +8,7 @@ project
 ├── .env
 ├── env.py
 ├── .git
-    └── ...
+│   └── ...
 ├── .gitignore
 ├── LICENSE
 ├── Procfile
