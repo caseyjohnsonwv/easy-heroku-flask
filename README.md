@@ -30,7 +30,7 @@ To update easy-herkou-flask:
 
 `$ python3 -m pip install easy-heroku-flask --upgrade`
 
-## Basic Usage
+## Usage
 To create a new Heroku/Flask project:
 
 `$ easy-heroku-flask -n <project name>`
@@ -39,7 +39,7 @@ To create a new Heroku/Flask project:
 
 | Flag | Name | Description |
 |:----:|--------|-------------|
-| -n | --name | Name of new project folder |
+| -n | --project-name | Name of new project folder |
 
 ## Optional Arguments
 
