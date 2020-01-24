@@ -1,6 +1,5 @@
 #!/bin/sh
 
-#POSITIONAL=()
 while [ $# -gt 0 ];
 do
 key="$1"
@@ -30,11 +29,7 @@ if [ -n "$HELP" ] || [ -z "$PROJNAME" ]; then
     exit
 fi
 
-
-
-sudo echo ""
-
-mkdir "$PROJNAME" 2>/dev/null
+mkdir "$PROJNAME" >/dev/null 2>&1
 if [ "$?" -ne "0" ]; then
     printf "Unable to create directory '$PROJNAME'- is this valid?\n"
     exit
@@ -48,15 +43,15 @@ rm -rf .ehfqs
 echo ".env\nenv.py\nenv.pyc\n__pycache__" > .gitignore
 
 printf "Installing Heroku/Flask requirements.\n"
-python3 -m pip install -r requirements.txt --no-cache-dir --upgrade -q -q -q 2>/dev/null
+python3 -m pip install -r requirements.txt --no-cache-dir --upgrade -q -q -q >/dev/null 2>&1
 
 if [ -n "$REPOURL" ]; then
     printf "Syncing new project to remote repository.\n"
-    git init 2>/dev/null
-    git add . 2>/dev/null
-    git commit -m "initial commit" 2>/dev/null
-    git remote add origin "$REPOURL" 2>/dev/null
-    git push origin master 2>/dev/null
+    git init  >/dev/null 2>&1
+    git add . >/dev/null 2>&1
+    git commit -m "initial commit" >/dev/null 2>&1
+    git remote add origin "$REPOURL" >/dev/null 2>&1
+    git push origin master >/dev/null 2>&1
     if [ "$?" -ne "0" ]; then
       printf "Failed to push to '$REPOURL'- is this valid?\n"
       exit
