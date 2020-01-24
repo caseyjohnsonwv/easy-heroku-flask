@@ -35,18 +35,18 @@ To create a new Heroku/Flask project:
 
 `$ easy-heroku-flask -n <project name>`
 
-## Required Arguments
+### Required Arguments
 
 | Flag | Name | Description |
 |:----:|--------|-------------|
-| -n | --project-name | Name of new project folder |
+| -n | --project-name | Name of new project folder to create. |
 
-## Optional Arguments
+### Optional Arguments
 
 | Flag | Name | Description |
 |:----:|--------|-------------|
-| -h | --help | Display help text |
-| -u | --repo-url | URL of remote project repository |
+| -h | --help | Display help text. |
+| -u | --repo-url | URL of an empty remote repository. The project template will be pushed to *origin/master* at this URL. |
 
 
 ## Authors
