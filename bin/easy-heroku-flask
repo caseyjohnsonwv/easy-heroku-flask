@@ -1,21 +1,44 @@
 #!/bin/sh
 
-if [ $# -lt 1 ]; then
-    printf "Usage: 'easy-heroku-flask <project name>'\n"
+#POSITIONAL=()
+while [ $# -gt 0 ];
+do
+key="$1"
+case $key in
+    -h|--help)
+    HELP="1"
+    shift # past argument
+    ;;
+    -n|--project-name)
+    PROJNAME="$2"
+    shift # past argument
+    shift # past value
+    ;;
+    -u|--repo-url)
+    REPOURL="$2"
+    shift # past argument
+    shift # past value
+    ;;
+    *)    # unknown option
+    shift
+    ;;
+esac
+done
+
+if [ -n "$HELP" ] || [ -z "$PROJNAME" ]; then
+    printf "Visit https://github.com/caseyjohnsonwv/easy-heroku-flask for help.\n"
     exit
 fi
 
-sudo echo ""
 
-PROJNAME=$1
-REPOURL="https://github.com/caseyjohnsonwv/$PROJNAME"
+
+sudo echo ""
 
 mkdir "$PROJNAME" 2>/dev/null
 if [ "$?" -ne "0" ]; then
     printf "Unable to create directory '$PROJNAME'- is this valid?\n"
     exit
 fi
-
 cd "$PROJNAME"
 
 printf "Cloning app template from https://github.com/caseyjohnsonwv/easy-heroku-flask.\n"
@@ -25,19 +48,19 @@ rm -rf .ehfqs
 echo ".env\nenv.py\nenv.pyc\n__pycache__" > .gitignore
 
 printf "Installing Heroku/Flask requirements.\n"
-python3 -m pip install -r requirements.txt --no-cache-dir --force-reinstall --upgrade -q
+python3 -m pip install -r requirements.txt --no-cache-dir --upgrade -q -q -q 2>/dev/null
 
-printf "Installing Heroku command line interface.\n"
-sudo snap install --classic heroku -q
-
-printf "Syncing new project to remote repository.\n"
-git init -q
-git add .
-git commit -m "initial commit" -q
-git remote add origin "$REPOURL" -q
-git push origin master -q
-if [ "$?" -ne "0" ]; then
-  printf "Failed to push to '$REPOURL'- is this valid?\n"
+if [ -n "$REPOURL" ]; then
+    printf "Syncing new project to remote repository.\n"
+    git init 2>/dev/null
+    git add . 2>/dev/null
+    git commit -m "initial commit" 2>/dev/null
+    git remote add origin "$REPOURL" 2>/dev/null
+    git push origin master 2>/dev/null
+    if [ "$?" -ne "0" ]; then
+      printf "Failed to push to '$REPOURL'- is this valid?\n"
+      exit
+    fi
 fi
 
 printf "Heroku/Flask project '$PROJNAME' created.\n"
