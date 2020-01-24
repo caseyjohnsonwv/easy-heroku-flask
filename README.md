@@ -1,5 +1,5 @@
 # easy-heroku-flask
-For quickly generating Heroku/Flask project trees.
+For quickly generating Heroku/Flask projects with populated application templates. Currently supports SQLAlchemy.
 
 ## Output
 ```sh
@@ -30,10 +30,24 @@ To update easy-herkou-flask:
 
 `$ python3 -m pip install easy-heroku-flask --upgrade`
 
-## Usage
+## Basic Usage
 To create a new Heroku/Flask project:
 
-`$ easy-heroku-flask <project name>`
+`$ easy-heroku-flask -n <project name>`
+
+## Required Arguments
+
+| Flag | Name | Description |
+|:----:|--------|-------------|
+| -n | --name | Name of new project folder |
+
+## Optional Arguments
+
+| Flag | Name | Description |
+|:----:|--------|-------------|
+| -h | --help | Display help text |
+| -u | --repo-url | URL of remote project repository |
+
 
 ## Authors
 - Casey Johnson - *initial work* - <a href="https://github.com/caseyjohnsonwv">caseyjohnsonwv</a>

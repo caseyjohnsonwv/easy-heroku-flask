@@ -1,11 +1,39 @@
 #!/bin/sh
 
-if [ $# -lt 1 ]; then
-    printf "Usage: 'easy-heroku-flask <project name>'\n"
+#POSITIONAL=()
+while [ $# -gt 0 ];
+do
+key="$1"
+case $key in
+    -h|--help)
+    HELP="1"
+    shift # past argument
+    ;;
+    -n|--project-name)
+    PROJNAME="$2"
+    shift # past argument
+    shift # past value
+    ;;
+    -u|--repo-url)
+    REPOURL="$2"
+    shift # past argument
+    shift # past value
+    ;;
+    *)    # unknown option
+    shift
+    ;;
+esac
+done
+
+if [ -n "$HELP" ] || [ -z "$PROJNAME" ]; then
+    printf "Visit https://github.com/caseyjohnsonwv/easy-heroku-flask for help.\n"
     exit
 fi
 
-PROJNAME=$1
+
+
+sudo echo ""
+
 mkdir "$PROJNAME" 2>/dev/null
 if [ "$?" -ne "0" ]; then
     printf "Unable to create directory '$PROJNAME'- is this valid?\n"
@@ -13,11 +41,26 @@ if [ "$?" -ne "0" ]; then
 fi
 cd "$PROJNAME"
 
+printf "Cloning app template from https://github.com/caseyjohnsonwv/easy-heroku-flask.\n"
 git clone https://github.com/caseyjohnsonwv/easy-heroku-flask .ehfqs -q
 mv .ehfqs/quickstart/* .
 rm -rf .ehfqs
-
-git init -q
 echo ".env\nenv.py\nenv.pyc\n__pycache__" > .gitignore
 
-printf "Flask project '$PROJNAME' created.\n"
+printf "Installing Heroku/Flask requirements.\n"
+python3 -m pip install -r requirements.txt --no-cache-dir --upgrade -q -q -q 2>/dev/null
+
+if [ -n "$REPOURL" ]; then
+    printf "Syncing new project to remote repository.\n"
+    git init 2>/dev/null
+    git add . 2>/dev/null
+    git commit -m "initial commit" 2>/dev/null
+    git remote add origin "$REPOURL" 2>/dev/null
+    git push origin master 2>/dev/null
+    if [ "$?" -ne "0" ]; then
+      printf "Failed to push to '$REPOURL'- is this valid?\n"
+      exit
+    fi
+fi
+
+printf "Heroku/Flask project '$PROJNAME' created.\n"
