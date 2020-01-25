@@ -46,17 +46,19 @@ git clone https://github.com/caseyjohnsonwv/easy-heroku-flask .ehfqs -q
 mv .ehfqs/quickstarts/base/* .
 if [ -z "$PROJTYPE" ]; then
     mv .ehfqs/quickstarts/no-type/* .
+    mv .ehfqs/quickstarts/no-type/.* . >/dev/null 2>&1
 elif [ ! -d ".ehfqs/quickstarts/$PROJTYPE" ]; then
     printf "Unable to find app template '$PROJTYPE'- is this valid?\n"
     exit
 else
     mv .ehfqs/quickstarts/"$PROJTYPE"/* .
+    mv .ehfqs/quickstarts/"$PROJTYPE"/.* . >/dev/null 2>&1
 fi
 rm -rf .ehfqs
 echo ".env\nenv.py\nenv.pyc\n__pycache__" > .gitignore
 
 printf "Installing Heroku/Flask requirements.\n"
-python3 -m pip install -r requirements.txt --no-cache-dir --upgrade -q -q -q >/dev/null 2>&1
+python3 -m pip install -r requirements.txt --no-cache-dir --upgrade >/dev/null 2>&1
 
 if [ -n "$REPOURL" ]; then
     printf "Syncing new project to remote repository.\n"
