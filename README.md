@@ -1,5 +1,5 @@
 # easy-heroku-flask
-For quickly generating Heroku/Flask projects with populated application templates. Currently supports SQLAlchemy.
+For quickly generating Heroku/Flask projects with populated application templates.
 
 ## Output
 ```sh
@@ -46,6 +46,7 @@ To create a new Heroku/Flask project:
 | Flag | Name | Description |
 |:----:|--------|-------------|
 | -h | --help | Display help text. |
+| -t | --project-type | Supports 'sqlalchemy'. Omission yields a barebones template. |
 | -u | --repo-url | URL of an empty remote repository. The project template will be pushed to *origin/master*. |
 
 
