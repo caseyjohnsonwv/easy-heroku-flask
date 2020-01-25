@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
   name = "easy-heroku-flask",
-  version = "0.0.2",
+  version = "0.0.3",
   author = "Casey Johnson",
   author_email = "caseyjohnsonwv@gmail.com",
   description = "Create new Heroku/Flask file structures in one command.",

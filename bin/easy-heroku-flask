@@ -13,6 +13,11 @@ case $key in
     shift # past argument
     shift # past value
     ;;
+    -t|--project-type)
+    PROJTYPE="$2"
+    shift
+    shift
+    ;;
     -u|--repo-url)
     REPOURL="$2"
     shift # past argument
@@ -38,7 +43,15 @@ cd "$PROJNAME"
 
 printf "Cloning app template from https://github.com/caseyjohnsonwv/easy-heroku-flask.\n"
 git clone https://github.com/caseyjohnsonwv/easy-heroku-flask .ehfqs -q
-mv .ehfqs/quickstart/* .
+mv .ehfqs/quickstarts/base/* .
+if [ -z "$PROJTYPE" ]; then
+    mv .ehfqs/quickstarts/no-type/* .
+elif [ ! -d ".ehfqs/quickstarts/$PROJTYPE" ]; then
+    printf "Unable to find app template '$PROJTYPE'- is this valid?\n"
+    exit
+else
+    mv .ehfqs/quickstarts/"$PROJTYPE"/* .
+fi
 rm -rf .ehfqs
 echo ".env\nenv.py\nenv.pyc\n__pycache__" > .gitignore
 
